@@ -8,6 +8,7 @@ import {PagesModule} from '../pages/pages.module';
 import {ShareModule} from '../share/share.module';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import {IndexStoreModule} from '../store/index.store.module';
 
 registerLocaleData(zh);
 
@@ -20,6 +21,7 @@ registerLocaleData(zh);
     ServicesModule,
     PagesModule,
     ShareModule,
+    IndexStoreModule,
     AppRoutingModule,
   ],
   exports: [

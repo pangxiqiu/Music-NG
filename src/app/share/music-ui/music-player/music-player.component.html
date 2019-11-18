@@ -30,10 +30,10 @@
         </div>
         <div class="bar">
           <div class="slider-wrap">
-            <app-music-slider></app-music-slider>
+            <app-music-slider [bufferOffSet]="bufferOffSet" [(ngModel)]="sliderValue"></app-music-slider>
           </div>
           <span class="time">
-            <em>00:00</em> / 04:35
+            <em>{{sliderValue}}</em> / 100
           </span>
         </div>
       </div>
@@ -47,6 +47,9 @@
         <p class="open">
           <span></span>
         </p>
+        <div class="control-vol">
+          <app-music-slider [musicVertical]="true"></app-music-slider>
+        </div>
       </div>
     </div>
   </div>

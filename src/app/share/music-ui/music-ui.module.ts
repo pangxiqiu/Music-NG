@@ -4,6 +4,7 @@ import { SingleSheetComponent } from './single-sheet/single-sheet.component';
 import {PlayCountPipe} from '../play-count.pipe';
 import { MusicPlayerComponent } from './music-player/music-player.component';
 import {MusicSliderModule} from './music-slider.module';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -15,6 +16,7 @@ import {MusicSliderModule} from './music-slider.module';
   imports: [
     CommonModule,
     MusicSliderModule,
+    FormsModule,
   ],
   exports: [
     SingleSheetComponent,

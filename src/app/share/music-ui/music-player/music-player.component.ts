@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./music-player.component.less']
 })
 export class MusicPlayerComponent implements OnInit {
-
+  sliderValue = 40;
+  bufferOffSet = 50;
   constructor() { }
 
   ngOnInit() {
