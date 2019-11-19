@@ -8,32 +8,30 @@
   <div class="container">
     <div class="wrap">
       <div class="btns">
-        <i class="prev"></i>
-        <i class="toggle"></i>
-        <i class="next"></i>
+        <i class="prev" (click)="onPrev(currentIndex - 1)"></i>
+        <i class="toggle" [class.playing]="playing" (click)="onToggle()"></i>
+        <i class="next" (click)="onNext(currentIndex + 1)"></i>
       </div>
       <div class="head">
-        <img src="asdsa" alt="">
+        <img [src]="PicUrl" alt="">
         <i class="mark"></i>
       </div>
       <div class="play">
-        <div class="words clearfix hide">
-          <p class="ellipsis margin-bottom-none">革命</p>
+        <div class="words clearfix">
+          <p class="ellipsis margin-bottom-none">{{currentSong?.name}}</p>
           <ul class="songs clearfix margin-bottom-none">
-            <li>
-              <a>歌手</a>/
-            </li>
-            <li>
-              <a>歌手</a>
+            <li *ngFor="let singer of currentSong?.ar; last as isLast">
+              <a>{{singer.name}}</a>
+              <span [hidden]="isLast">/</span>
             </li>
           </ul>
         </div>
         <div class="bar">
           <div class="slider-wrap">
-            <app-music-slider [bufferOffSet]="bufferOffSet" [(ngModel)]="sliderValue"></app-music-slider>
+            <app-music-slider [bufferOffSet]="bufferOffSet" [(ngModel)]="percent" (onAfterChange)="onPersentChange($event)"></app-music-slider>
           </div>
           <span class="time">
-            <em>{{sliderValue}}</em> / 100
+            <em>{{currentTime|formatTime}}</em> / {{duration|formatTime}}
           </span>
         </div>
       </div>
@@ -42,15 +40,20 @@
         <i class="share" title="分享"></i>
       </div>
       <div class="ctrl">
-        <i class="volume" title="音量"></i>
+        <i class="volume" title="音量" (click)="toggleVolume($event)"></i>
         <i class="loop" title="循环"></i>
         <p class="open">
           <span></span>
         </p>
-        <div class="control-vol">
-          <app-music-slider [musicVertical]="true"></app-music-slider>
+        <div class="control-vol" [hidden]="!showVolume">
+          <app-music-slider [musicVertical]="true" [(ngModel)]="volume" (ngModelChange)="onVolumeChange($event)"></app-music-slider>
         </div>
       </div>
     </div>
   </div>
+  <audio  #audioElement
+          [src]="currentSong?.url"
+          (canplay)="onCanPlay()"
+          (timeupdate)="onTimeUpdate($event)"
+  ></audio>
 </div>

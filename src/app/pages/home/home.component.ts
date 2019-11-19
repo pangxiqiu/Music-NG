@@ -4,6 +4,9 @@ import {NzCarouselComponent} from 'ng-zorro-antd';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {SheetService} from '../../services/sheet.service';
+import {IndexStoreModule} from '../../store/index.store.module';
+import {Store} from '@ngrx/store';
+import {SetCurrentIndex, SetPlayList, SetSongList} from '../../store/actions/player.action';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +14,7 @@ import {SheetService} from '../../services/sheet.service';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
+  // 初始化参数：轮播图、选项卡分类、歌单、歌手
   carouselActiveIndex = 0;
   banners: Banner[];
   tags: HotTag[];
@@ -20,7 +24,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private sheetSever: SheetService
+    private sheetSever: SheetService,
+    private store$: Store<IndexStoreModule>
   ) {
     this.route.data.pipe(map(res => res.homeDatas)).subscribe(([banners, tags, sheets, artists]) => {
       this.banners = banners;
@@ -40,8 +45,10 @@ export class HomeComponent implements OnInit {
 
   onPlaySheet(id: number) {
     console.log('id', id);
-    this.sheetSever.playSheet(id).subscribe(res => {
-      console.log('res', res);
+    this.sheetSever.playSheet(id).subscribe(list => {
+      this.store$.dispatch(SetSongList({ songList: list}));
+      this.store$.dispatch(SetPlayList({ playList: list}));
+      this.store$.dispatch(SetCurrentIndex({ currentIndex: 0}));
     });
   }
 }

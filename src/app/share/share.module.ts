@@ -4,8 +4,6 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {FormsModule} from '@angular/forms';
 import {MusicUiModule} from './music-ui/music-ui.module';
 
-
-
 @NgModule({
   imports: [
     NgZorroAntdModule,

@@ -2,10 +2,10 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, forwardRef,
+  ElementRef, EventEmitter, forwardRef,
   Inject,
   Input, OnDestroy,
-  OnInit,
+  OnInit, Output,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
@@ -37,7 +37,7 @@ export class MusicSliderComponent implements OnInit , OnDestroy, ControlValueAcc
   @Input() musicMin = 0;
   @Input() musicMax = 100;
   @Input() bufferOffSet: SlideValue = 0;
-
+  @Output() onAfterChange = new EventEmitter<SlideValue>();
   @ViewChild('musicSlider', {static : true}) private musicSlider: ElementRef;
 
   private dragStart$: Observable<number>;
@@ -134,6 +134,7 @@ export class MusicSliderComponent implements OnInit , OnDestroy, ControlValueAcc
     }
   }
   private onDragEnd() {
+    this.onAfterChange.emit(this.value);
     this.toggleDragMoving(false);
     this.cdr.markForCheck();
   }
