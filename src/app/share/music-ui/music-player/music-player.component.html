@@ -41,19 +41,27 @@
       </div>
       <div class="ctrl">
         <i class="volume" title="音量" (click)="toggleVolume($event)"></i>
-        <i class="loop" title="循环"></i>
-        <p class="open">
+        <i [ngClass]="currentMode.type" [title]="currentMode.label" (click)="changeMode()"></i>
+        <p class="open" (click)="toggleListPanel()">
           <span></span>
         </p>
         <div class="control-vol" [hidden]="!showVolume">
           <app-music-slider [musicVertical]="true" [(ngModel)]="volume" (ngModelChange)="onVolumeChange($event)"></app-music-slider>
         </div>
       </div>
+      <app-music-panel [songList]="SongList"
+                       [currentSong]="currentSong"
+                       [currentIndex]="currentIndex"
+                       [show]="showPanel"
+                       (onClose)="showPanel = false"
+                       (onChangeSong)="onChangeSong($event)"
+      ></app-music-panel>
     </div>
   </div>
   <audio  #audioElement
           [src]="currentSong?.url"
           (canplay)="onCanPlay()"
           (timeupdate)="onTimeUpdate($event)"
+          (ended)="onEnded()"
   ></audio>
 </div>

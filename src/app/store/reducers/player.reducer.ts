@@ -3,7 +3,7 @@ import {Song} from '../../services/data-types/common.types';
 import {SetCurrentIndex, SetPlaying, SetPlayList, SetPlayMode, SetSongList} from '../actions/player.action';
 import {Action, createReducer, on} from '@ngrx/store';
 
-export type PlayState = {
+export interface PlayState {
   // 播放状态
   playing: boolean;
   // 播放模式
@@ -14,7 +14,7 @@ export type PlayState = {
   playList: Song[];
   // 当前正在播放的索引
   currentIndex: number;
-};
+}
 
 export const initialState: PlayState = {
   playing: false,

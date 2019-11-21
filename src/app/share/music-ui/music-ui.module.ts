@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SingleSheetComponent } from './single-sheet/single-sheet.component';
 import {PlayCountPipe} from '../pipes/play-count.pipe';
 import { MusicPlayerComponent } from './music-player/music-player.component';
-import {MusicSliderModule} from './music-slider.module';
+import {MusicSliderModule} from './music-slider/music-slider.module';
 import {FormsModule} from '@angular/forms';
-import {MusicPlayerModule} from './music-player.module';
+import {MusicPlayerModule} from './music-player/music-player.module';
 
 
 
