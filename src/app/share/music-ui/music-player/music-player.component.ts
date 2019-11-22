@@ -5,7 +5,7 @@ import {getCurrentIndex, getCurrentSong, getPlayList, getPlayMode, getSongList} 
 import {Song} from '../../../services/data-types/common.types';
 import {PlayMode} from './player-types';
 import {SetCurrentIndex, SetPlayList, SetPlayMode} from '../../../store/actions/player.action';
-import {shuffle} from '../../../utils/array';
+import {findIndex, shuffle} from '../../../utils/array';
 
 const modeTypes: PlayMode[] = [{
     type: 'loop',
@@ -114,7 +114,7 @@ export class MusicPlayerComponent implements OnInit {
   }
 
   private updateCurrentIndex(list: Song[], song: Song) {
-    const newIndex = list.findIndex(item => item.id === song.id);
+    const newIndex = findIndex(list, song);
     this.store$.dispatch(SetCurrentIndex( {currentIndex: newIndex}));
   }
   // 播放结束
