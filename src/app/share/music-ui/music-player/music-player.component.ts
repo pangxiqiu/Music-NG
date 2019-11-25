@@ -7,6 +7,8 @@ import {PlayMode} from './player-types';
 import {SetCurrentIndex, SetPlayList, SetPlayMode} from '../../../store/actions/player.action';
 import {findIndex, shuffle} from '../../../utils/array';
 
+
+
 const modeTypes: PlayMode[] = [{
     type: 'loop',
     label: '循环'

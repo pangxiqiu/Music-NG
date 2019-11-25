@@ -43,7 +43,7 @@
     <app-music-scroll class="list-lyric">
 <!--                   [data]="currentLyric"-->
       <ul>
-        <li *ngFor="let item of currentLyric">
+        <li *ngFor="let item of currentLyric; index as i" [class.current]="currentLineNum === i">
           {{item.txt}} <br /> {{item.txtCn}}
         </li>
       </ul>
